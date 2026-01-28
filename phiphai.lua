@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/1060523d7ac99dac"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/chienminh21/phiphaiv2/refs/heads/main.lua/phiphaimain.lua"))()
