@@ -1,14 +1,14 @@
 Pusers = game:GetService "Players"
 Lusers = Pusers.LocalPlayer
 
-_G.HitboxEnabled = true
-_G.HitboxSize = 100
-_G.HitboxTransparency = 0.6
+_G.HitboxEnabled = false
+_G.HitboxSize = 20
+_G.HitboxTransparency = 0.9
 _G.HitboxNoCollision = true
 _G.TeamCheck = "FFA"
 
 original = {}
-parts = {"UpperTorso", "Head", "HumanoidRootPart"}
+parts = {"UpperTorso","Head","HumanoidRootPart"}
 
 save = (p, part) ->
     original[p] or= {}
