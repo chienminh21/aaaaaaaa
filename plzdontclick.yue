@@ -1,1 +1,50 @@
+Pusers = game:GetService "Players"
+Lusers = Pusers.LocalPlayer
 
+_G.HitboxEnabled = true
+_G.HitboxSize = 100
+_G.HitboxTransparency = 0.6
+_G.HitboxNoCollision = true
+_G.TeamCheck = "FFA"
+
+original = {}
+parts = {"UpperTorso", "Head", "HumanoidRootPart"}
+
+save = (p, part) ->
+    original[p] or= {}
+    original[p][part] or= {Size: part.Size, Transparency: part.Transparency, CanCollide: part.CanCollide}
+
+restore = (p) ->
+    if d = original[p]
+        for part, info in pairs d
+            if part and part\IsDescendantOf game
+                part.Size = info.Size
+                part.Transparency = info.Transparency
+                part.CanCollide = info.CanCollide
+
+isEnemy = (p) -> _G.TeamCheck == "FFA" or _G.TeamCheck == "Everyone" or p.Team ~= Lusers.Team
+
+apply = (p) ->
+    return unless p.Character
+    for name in *parts
+        part = p.Character\FindFirstChild name
+        if part and part\IsA "BasePart"
+            save p, part
+            part.Size = Vector3.new _G.HitboxSize, _G.HitboxSize, _G.HitboxSize
+            part.Transparency = _G.HitboxTransparency
+            part.CanCollide = not _G.HitboxNoCollision
+
+update = ->
+    for _, plr in ipairs Pusers\GetPlayers!
+        continue if plr == Lusers
+        if _G.HitboxEnabled and isEnemy plr
+            apply plr
+        else
+            restore plr
+
+Pusers.PlayerAdded\Connect (p) -> p.CharacterAdded\Connect -> task.wait(0.2) update! if _G.HitboxEnabled
+
+for _, p in ipairs Pusers\GetPlayers!
+    p.CharacterAdded\Connect -> task.wait(0.2) update! if _G.HitboxEnabled
+
+game:GetService("RunService").Heartbeat\Connect update
