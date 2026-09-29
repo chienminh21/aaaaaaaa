@@ -4,7 +4,8 @@ local bd88_2 = {
     "nill"
 }
 
-local x99_msg = "why u bypass key"
+
+local x99_msg = string.char(119, 104, 121, 32, 117, 32, 98, 121, 112, 97, 115, 115, 32, 107, 101, 121)
 
 local g_svc = game:GetService("Players")
 local p_plr = g_svc.LocalPlayer
