@@ -1,2 +1,2 @@
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/chienminh21/aaaaaaaa/refs/heads/main/phiphai.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/chienminh21/phiphaiv2/refs/heads/main.lua/phiphaimain.lua"))()
